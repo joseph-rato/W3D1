@@ -16,9 +16,19 @@ def physics_no_chemistry
   execute(<<-SQL)
   SELECT 
     yr
+
   FROM 
-    nobels 
+    (SELECT *
+    FROM 
+      nobels 
+    WHERE 
+      subject != 'Chemistry' GROUP BY subject) AS none_chem_yrs
+      
   WHERE 
     subject = 'Physics'
   SQL
 end
+
+# how would selfjoins work for this would we select the years where physics in a winner
+# and then 
+# 
